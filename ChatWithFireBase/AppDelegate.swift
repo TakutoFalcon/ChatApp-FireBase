@@ -1,19 +1,21 @@
 //
 //  AppDelegate.swift
-//  ChatWithFireBase
+//  ChatAppWithFirebase
 //
-//  Created by 糸川拓磨 on 2021/09/17.
+//  Created by Uske on 2020/03/15.
+//  Copyright © 2020 Uske. All rights reserved.
 //
 
 import UIKit
+import Firebase
 
-@main
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        FirebaseApp.configure()
         return true
     }
 
