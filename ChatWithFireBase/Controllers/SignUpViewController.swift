@@ -73,40 +73,40 @@ class SignUpViewController: UIViewController {
             }
             
         }
-
+        
     }
     
     private func createUserToFirestore(profileImageUrl: String) {
         guard let email = emailTextField.text else { return }
-          guard let password = passwordTextField.text else { return }
-          
-          Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
-              if let err = err {
-                  print("認証情報の保存に失敗しました。\(err)")
-                  return
-              }
-                            
-              guard let uid = res?.user.uid else { return }
-              guard let username = self.usernameTextField.text else { return }
-              let docData = [
-                  "email": email,
-                  "username": username,
-                  "createdAt": Timestamp(),
-                  "profileImageUrl": profileImageUrl
-                  ] as [String : Any]
-              
-              Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
-                  if let err = err {
-                      print("Firestoreへの保存に失敗しました。\(err)")
-                      return
-                  }
-                  
-                  print("Firestoreへの情報の保存が成功しました。")
-                  self.dismiss(animated: true, completion: nil)
-                  
-              }
-              
-          }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
+            if let err = err {
+                print("認証情報の保存に失敗しました。\(err)")
+                return
+            }
+            
+            guard let uid = res?.user.uid else { return }
+            guard let username = self.usernameTextField.text else { return }
+            let docData = [
+                "email": email,
+                "username": username,
+                "createdAt": Timestamp(),
+                "profileImageUrl": profileImageUrl
+            ] as [String : Any]
+            
+            Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+                if let err = err {
+                    print("Firestoreへの保存に失敗しました。\(err)")
+                    return
+                }
+                
+                print("Firestoreへの情報の保存が成功しました。")
+                self.dismiss(animated: true, completion: nil)
+                
+            }
+            
+        }
     }
     
 }
@@ -130,7 +130,7 @@ extension SignUpViewController: UITextFieldDelegate {
 }
 
 extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editImage = info[.editedImage] as? UIImage {
             profileImageButton.setImage(editImage.withRenderingMode(.alwaysOriginal), for: .normal)
