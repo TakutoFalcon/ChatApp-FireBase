@@ -11,5 +11,6 @@ target 'ChatWithFireBase' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
   pod 'Nuke'
+  pod 'PKHUD'
 
 end
